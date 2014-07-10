@@ -9,26 +9,28 @@ SITE = "http://www.hackaday.com"
 sp = serial.Serial("/dev/ttyUSB0", 38400, timeout = 2)
 sp.flush()  # clear out whatever junk is in the serial buffer
 
-sp.write('O')  # toggle light back off 
+sp.write('O')  # turn light on
 time.sleep(1)
-sp.write('F')  # toggle light back off 
+sp.write('F')  # turn light back off 
 time.sleep(1)
-sp.write('O')  # toggle light back off 
+sp.write('O')  # turn light on
 time.sleep(1)
-sp.write('F')  # toggle light back off 
+sp.write('F')  # turn light back off 
 time.sleep(1)
 
 def whichHAD():
-    '''Fetches the HAD website and parses out the current comic number'''
+    '''Fetches the HAD website and parses out the current top post link'''
     site = lxml.html.parse(SITE)
     tree = site.getroot()
     posts = tree.find_class("post")
     firstPost = posts[0]
-    link = firstPost.iterdescendants("a").next().attrib['href']
-    return link
+    firstLink = firstPost.iterdescendants("a").next()
+    url = firstLink.attrib['href']
+    return url
     
 lastHAD = whichHAD()
-## Default is to always start up with a new link 
+sp.write('O')  # turn light on
+## Start out with the current top post, light on
 lastTime = time.time()
 
 while(True):                    # endless loop
@@ -39,7 +41,7 @@ while(True):                    # endless loop
     if response == "X":
         print "Received button press, loading"
         webbrowser.open(lastHAD)
-        sp.write('F')  # turn light back off 
+        sp.write('F')  # turn light off 
 
     thisTime = time.time()
 
