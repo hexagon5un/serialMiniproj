@@ -3,15 +3,20 @@ import webbrowser
 import lxml.html
 import time
 
-CHECK_DELAY = 2 * 60       ## every 5 minutes
+CHECK_DELAY = 5 * 60       ## every X minutes
 SITE = "http://www.hackaday.com"
 
 sp = serial.Serial("/dev/ttyUSB0", 38400, timeout = 2)
 sp.flush()  # clear out whatever junk is in the serial buffer
 
-sp.write('L')  # toggle light back off 
+sp.write('O')  # toggle light back off 
 time.sleep(1)
-sp.write('L')  # toggle light back off 
+sp.write('F')  # toggle light back off 
+time.sleep(1)
+sp.write('O')  # toggle light back off 
+time.sleep(1)
+sp.write('F')  # toggle light back off 
+time.sleep(1)
 
 def whichHAD():
     '''Fetches the HAD website and parses out the current comic number'''
@@ -34,7 +39,7 @@ while(True):                    # endless loop
     if response == "X":
         print "Received button press, loading"
         webbrowser.open(lastHAD)
-        sp.write('L')  # toggle light back off 
+        sp.write('F')  # turn light back off 
 
     thisTime = time.time()
 
@@ -45,6 +50,6 @@ while(True):                    # endless loop
         
         if not lastHAD == currentHAD:
             ## Warn the user!
-            sp.write('L')  # turn light on
+            sp.write('O')  # turn light on
             lastHAD = currentHAD
 
