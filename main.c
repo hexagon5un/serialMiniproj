@@ -42,6 +42,12 @@ int main(void) {
             if (UDR0 == 'L'){        /* if the received byte is an 'L' */
                 toggle_bit(LED_PORT, LED);                /* blink LED */
             }
+            if (UDR0 == 'O'){        
+                set_bit(LED_PORT, LED);                      /* on LED */
+            }
+            if (UDR0 == 'F'){       
+                clear_bit(LED_PORT, LED);                   /* off LED */
+            }
         }
 
         // Check to see if button pressed
