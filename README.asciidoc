@@ -2,30 +2,37 @@
 
 === Super-minimal experimentation with the AVR's serial hardware
 
-Code (python and AVR-C) for an upcoming Make Magazine skill-builder section on
+Code (Python and AVR-flavored C) for an upcoming Make Magazine skill-builder section on
 using USART serial for two-way communication between the microcontroller and
 your desktop (for fun and/or profit). 
 
 The `main.c` code for the AVR and the `webLauncher.py` routine for your desktop
 computer speak to each other using a tremendously simple protocol: sending an
 "L" to the AVR tells it to toggle the LED on and off, and sending an "X" to the
-desktop instructs the python routine to open up a website.  Add a button and
+desktop instructs the Python routine to open up a website.  Add a button and
 LED to the AVR and you can be notified when something changes on the computer
-side, and react to it.
+side, and react to it with a button press.
 
-So far, so good.  It was the most I could squeeze out of twenty lines of code. 
+So far, so good.  It was the most I could squeeze out of just a few lines of
+code. 
 
 Along the way, we get to learn stuff about setting up the AVR's serial
 peripheral hardware: setting baud rates, enabling transmit and receive, how to
-queue up bytes, etc.  
+queue up bytes, etc.  Solid tutorial material.
 
 === Extras
 
-And it only takes a little more work to flesh this out into something actually useful.
+It only takes a little more work to flesh this out into something that you'd be
+willing to have on your desk.
 
-Included are python routines that check some websites (XKCD and Hack-a-Day respectively) to check if there's new content, and light up the LED if so.  Then, with a button press, the new material is loaded into a browser, the LED turned back off, and the python routine waits for the next change again.  
+Included are Python routines that check some websites (XKCD and Hack-a-Day
+respectively) to check if there's new content, and light up the LED if so.
+Then, with a button press, the new material is loaded into a browser, the LED
+turned back off, and the Python routine waits for the next change again.  
 
-All that's left to build up a nice project is a cool enclosure, a swanky (multi-colored?) LED, and a solid button.
+All that's left to build up a nice project is a cool enclosure, a swanky
+(multi-colored?) LED, and a solid button.  Have more LEDs and buttons?  You can
+track more websites.  
 
 === Hardware
 
