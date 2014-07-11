@@ -9,15 +9,6 @@ SITE = "http://www.hackaday.com"
 sp = serial.Serial("/dev/ttyUSB0", 38400, timeout = 2)
 sp.flush()  # clear out whatever junk is in the serial buffer
 
-sp.write('O')  # turn light on
-time.sleep(1)
-sp.write('F')  # turn light back off 
-time.sleep(1)
-sp.write('O')  # turn light on
-time.sleep(1)
-sp.write('F')  # turn light back off 
-time.sleep(1)
-
 def whichHAD():
     '''Fetches the HAD website and parses out the current top post link'''
     site = lxml.html.parse(SITE)
@@ -27,10 +18,24 @@ def whichHAD():
     firstLink = firstPost.iterdescendants("a").next()
     url = firstLink.attrib['href']
     return url
-    
-lastHAD = whichHAD()
-sp.write('O')  # turn light on
+
+def LED_on():    
+    sp.write('O')  # turn light on
+
+def LED_off():    
+    sp.write('F')  # turn light off
+
+## Blink to test LED, make sure working
+for i in range(3):
+    LED_on()
+    time.sleep(0.5)
+    LED_off()
+    time.sleep(0.5)
+
+## Initialize
 ## Start out with the current top post, light on
+lastHAD = whichHAD()
+LED_on()
 lastTime = time.time()
 
 while(True):                    # endless loop
@@ -41,7 +46,7 @@ while(True):                    # endless loop
     if response == "X":
         print "Received button press, loading"
         webbrowser.open(lastHAD)
-        sp.write('F')  # turn light off 
+        LED_off() 
 
     thisTime = time.time()
 
@@ -52,6 +57,6 @@ while(True):                    # endless loop
         
         if not lastHAD == currentHAD:
             ## Warn the user!
-            sp.write('O')  # turn light on
+            LED_on() 
             lastHAD = currentHAD
 
