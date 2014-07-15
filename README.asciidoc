@@ -2,9 +2,9 @@
 
 === Super-minimal experimentation with the AVR's serial hardware
 
-Code (Python and AVR-flavored C) for an upcoming Make Magazine skill-builder section on
-using USART serial for two-way communication between the microcontroller and
-your desktop (for fun and/or profit). 
+Here you'll find code (Python and AVR-flavored C) for an upcoming Make Magazine
+skill-builder section on using USART serial for two-way communication between
+the microcontroller and your desktop (for fun and/or profit). 
 
 The `main.c` code for the AVR and the `webLauncher.py` routine for your desktop
 computer speak to each other using a tremendously simple protocol: sending an
@@ -18,12 +18,12 @@ code.
 
 Along the way, we get to learn stuff about setting up the AVR's serial
 peripheral hardware: setting baud rates, enabling transmit and receive, how to
-queue up bytes, etc.  Solid tutorial material.
+queue up bytes for transmission, etc.  Solid tutorial material.
 
 === Extras
 
-It only takes a little more work to flesh this out into something that you'd be
-willing to have on your desk.
+From here, it only takes a little more work to flesh this out into something
+that you'd be willing to have on your desk.
 
 Included are Python routines that check some websites (XKCD and Hack-a-Day
 respectively) to check if there's new content, and light up the LED if so.
